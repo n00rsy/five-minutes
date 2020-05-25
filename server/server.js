@@ -17,19 +17,28 @@ messageQueue.enqueue({
     name: 'Noor Syed',
     message: 'this is from the server'
 });
-//implementation plan:
-/*
-on connect:
-    emit current message + time of switch
-on switch/ every 45 seconds:
-    broadcast new message + time of next switch
+var time = 0
 
+function update(){
+    time+=1
+    setItemTime()
+    if(time >=10){
+        time = 0
+        messageQueue.dequeue()
+        setItemTime()
+        io.sockets.emit('current-message',messageQueue.peek());
+        console.log("broadcasted latest message")
+        messageQueue.printQueue()
+    }
+}
 
-*/
+function setItemTime(){
+    messageQueue.peek().time = (messageQueue.items.length==1) ? -1: time 
+}
 
+let timerId = setInterval(() => update(), 1000);
 
 io.on("connection", (socket) => {
-
     socket.emit('current-message', messageQueue.peek())
     console.log("new connection")
 
