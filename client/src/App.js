@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import Form from "./components/form.js"
+import SubmissionForm from "./components/form.js"
 import socket from "./util/socketConfig.js"
 
 import './App.css';
@@ -25,7 +25,7 @@ function App() {
         <p
            id="message">{messageData.message}
         </p>
-      <Form></Form>
+      <SubmissionForm className="SubmissionForm"></SubmissionForm>
       </header>
     </div>
   );

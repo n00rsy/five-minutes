@@ -22,7 +22,7 @@ var time = 0
 function update(){
     time+=1
     setItemTime()
-    if(time >=10){
+    if(time >=45 && messageQueue.items.size>1){
         time = 0
         messageQueue.dequeue()
         setItemTime()
